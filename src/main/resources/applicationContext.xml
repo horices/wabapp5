@@ -25,10 +25,6 @@
     <bean id="indexController" class="com.horice.controller.IndexController">
         <property name="studentService" ref="studentService"></property>
     </bean>-->
-<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/views/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>-->
     <!-- 配置数据源 -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
@@ -64,12 +60,24 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <mvc:view-resolvers>
-        <mvc:freemarker />
-    </mvc:view-resolvers>
     <!-- 整合 freemarker -->
-    <mvc:freemarker-configurer>
-        <mvc:template-loader-path location="/views" />
-    </mvc:freemarker-configurer>
+<!--    <mvc:view-resolvers>
+        <mvc:freemarker suffix=".jsp" ></mvc:freemarker>
+    </mvc:view-resolvers>-->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="suffix" value=".ftl" />
+    </bean>
+<!--    <mvc:freemarker-configurer>
+        <mvc:template-loader-path location="/views/"></mvc:template-loader-path>
+    </mvc:freemarker-configurer>-->
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>-->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="defaultEncoding" value="utf-8" ></property>
+        <property name="templateLoaderPath" value="/WEB-INF/views"></property>
+    </bean>
 
 </beans>
